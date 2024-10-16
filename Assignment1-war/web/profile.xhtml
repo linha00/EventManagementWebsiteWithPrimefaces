@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="./layout/default.xhtml">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+    </h:head>
+
+    <ui:define name="title">
+        Profile Page
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="center">
+            <div id="profile_main_div">
+
+                <span class="profile_second_header">Profile Photo</span>
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                    <div style="min-height: 200px; max-height: 300px;">
+                        <p:graphicImage rendered="#{not empty userManagedBean.getPhoto()}"
+                                        value="upload/#{userManagedBean.photo}"
+                                        style="max-height: 300px; max-width: 1000px; border-radius: 5px;" />
+                        <p:graphicImage rendered="#{empty userManagedBean.getPhoto()}"
+                                        value="resources/image/fullLogo.webp"
+                                        style="max-height: 300px; max-width: 1000px; border-radius: 5px;" />
+                    </div>
+                    <div style="margin: 20px;">
+                        <p:commandButton value="Edit photo" oncomplete="PF('dialogWidget').show()" />
+                    </div>
+
+                    <p:dialog widgetVar="dialogWidget" modal="true" header="Photo Details">
+                        <div style="min-height: 200px; max-height: 300px;">
+                            <p:graphicImage
+                                value="resources/image/fullLogo.webp"
+                                style="max-height: 300px; max-width: 1000px; border-radius: 5px;" />
+                        </div>
+
+                        <h:form enctype="multipart/form-data" id="photoupdate">
+                            <h:inputFile value="#{userManagedBean.uploadedfile}" />
+                            <h:commandButton action="#{userManagedBean.upload}" value="Upload"/>
+                        </h:form>
+                    </p:dialog>
+                </div>
+
+                <div>
+                    <span class="profile_second_header">Account Information</span>
+                    <p:panelGrid columns="2">
+                        <h:outputText value="Name" styleClass="myEvent_itemHeader" />
+                        <h:outputText value="#{userManagedBean.getName()}" styleClass="myEvent_itemHeader" />
+
+                        <h:outputText value="Username" styleClass="myEvent_itemHeader" />
+                        <h:outputText value="#{userManagedBean.getUsername()}" styleClass="myEvent_itemHeader" />
+
+                        <h:outputText value="Email" styleClass="myEvent_itemHeader" />
+                        <h:outputText value="#{userManagedBean.getEmail()}" styleClass="myEvent_itemHeader" />
+
+                        <h:outputText value="Contact Number" styleClass="myEvent_itemHeader" />
+                        <h:outputText value="#{userManagedBean.getContact()}" styleClass="myEvent_itemHeader" />
+                    </p:panelGrid>
+                </div>
+                <div class="profile_button_group">
+                    <p:linkButton class="default_button" outcome="editProfile.xhtml" value="Edit Profile" />
+                    <p:linkButton class="default_button" outcome="editPassword.xhtml" value="Change Password" />
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

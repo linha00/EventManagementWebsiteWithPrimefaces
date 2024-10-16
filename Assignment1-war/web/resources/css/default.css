@@ -1,0 +1,691 @@
+body {
+    background-color: white;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;
+    width: 90%;
+    margin: 0 auto;
+    min-width: 1200px;
+    min-height: 1080px;
+    max-height: 3000px;
+}
+
+.custom-link.ui-state-disabled {
+    opacity: 1 !important; /* Override any opacity changes */
+    color: #007bff !important; /* Keep the link color consistent, adjust as needed */
+    cursor: pointer !important; /* Maintain the pointer cursor */
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF;
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+/*top bar*/
+#website_logo {
+    /*background-color: black;*/
+    width: 170px;
+    height: 60px;
+}
+
+#website_logo img {
+    width: 170px;
+    height: 60px;
+}
+
+#top_menu {
+    /*background-color: red;*/
+
+    display: flex;
+    min-width: 1000px;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+#searchbar {
+    /*background-color: blue;*/
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    min-width: 400px;
+    margin-left: -10px;
+}
+
+.search_input_box {
+    height: 32px;
+    font-size: 20px;
+}
+
+.search_dropbox {
+    margin-top: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.search_button {
+    height: 32px;
+    font-size: 15px;
+}
+
+#right_menu {
+    /*background-color: yellow;*/
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 60px;
+    width: 700px;
+}
+
+@media screen and (min-width: 1200px) {
+    #top_menu {
+        width: 1000px;
+    }
+
+    #searchbar {
+        margin-left: -10px;
+        width: 350px;
+    }
+
+    .search_input_box {
+        width: 150px;
+    }
+
+    .search_button {
+        width: 80px;
+    }
+
+}
+
+@media screen and (min-width: 1920px) {
+    #top_menu {
+        width: 1600px;
+    }
+
+    #searchbar {
+        justify-content: flex-end;
+        margin-left: -100px;
+        width: 1000px;
+    }
+
+    .search_input_box {
+        width: 500px;
+    }
+
+    .search_button {
+        width: 80px;
+    }
+}
+
+.ui-menubar {
+    background-color: white;
+    color: black;
+    border: 0px;
+
+    font-family: 'Arial', sans-serif; /* Specify a font */
+    font-size: 17px;
+}
+
+.ui-menubar .ui-menuitem-link:hover {
+    background-color: lightgray;
+}
+
+
+/*footer*/
+.footer_top {
+    /*background-color: white;*/
+
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    height: 170px;
+    align-items: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.footer_bottom {
+    /*background-color: lightgray;*/
+
+    display: flex;
+    justify-content: space-between;
+    height: 15px;
+    width: 98%;
+    margin-bottom: 5px;
+}
+
+#footer_bottom_middle {
+    display: flex;
+    width: 83%;
+    max-width: 1050px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_sell {
+    display: flex;
+    height: 15px;
+    width: 98%;
+    margin-bottom: 5px;
+    justify-content: center;
+}
+
+.footer_text_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.footerTextHeader {
+    color: white;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.footerText a {
+    color: white;
+}
+
+.footerText {
+    color: white;
+}
+
+.fullstop {
+    color: lightgrey;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+
+
+/*index*/
+#index_showcase img {
+    min-width: 1100px;
+    width: 1170px;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 1200px) {
+    #index_showcase img {
+        width: 1170px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    #index_showcase img {
+        width: 1890px;
+    }
+}
+.index_event_div {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.index_event_header {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.index_grid_box {
+    /*background-color: red;*/
+
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    min-width: 250px;
+    min-height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.index_grid_box:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Change shadow on hover */
+}
+
+h\\:outputLink:hover {
+    text-decoration: none;
+}
+
+.index_grid_photo_box {
+    /*background-color: yellow;*/
+
+    min-width: 220px;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.index_grid_photo {
+    min-height: 150px;
+    min-width: 150px;
+    max-width: 380px;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 3px;
+}
+
+.index_grid_event_name {
+    color: black;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the text to 2 lines */
+    -webkit-box-orient: vertical;
+}
+
+.index_grid_event_description {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the text to 2 lines */
+    -webkit-box-orient: vertical;
+}
+
+.index_grid_event_location {
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit the text to 2 lines */
+    -webkit-box-orient: vertical;
+}
+
+@media screen and (min-width: 1200px) {
+    .index_grid_box {
+        /*background-color: red;*/
+
+        width: 250px;
+        height: 350px;
+    }
+
+    .index_grid_photo_box {
+        width: 220px;
+        height: 200px;
+    }
+
+    .index_grid_event_name {
+        font-size: 25px;
+
+        max-width: 210px;
+        max-height: 2.8em;
+    }
+
+    .index_grid_event_description {
+        font-size: 12px;
+
+        max-width: 210px;
+        max-height: 2.8em;
+    }
+
+    .index_grid_event_location {
+        max-width: 210px;
+        max-height: 1.2em;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .index_grid_box {
+        width: 400px;
+        height: 500px;
+    }
+
+    .index_grid_photo_box {
+        width: 380px;
+        height: 300px;
+    }
+
+    .index_grid_event_name {
+        font-size: 30px;
+        max-width: 380px;
+        max-height: 2.8em;
+    }
+
+    .index_grid_event_description {
+        font-size: 20px;
+        max-width: 380px;
+        max-height: 2.8em;
+    }
+
+    .index_grid_event_location {
+        max-width: 380px;
+        max-height: 1.2em;
+    }
+}
+
+#profile_main_div {
+    /*background-color: red;*/
+
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.profile_div {
+    /*background-color: yellow;*/
+
+    display: flex;
+    flex-direction: row;
+}
+
+.profile_second_header {
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.profile_column {
+    /*background-color: black;*/
+
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.profile_column span {
+    font-size: 20px;
+}
+
+.profile_button_group {
+    /*background-color: black;*/
+
+    margin-top: 20px;
+    width: 600px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.default_button {
+    font-size: 20px;
+    padding: 10px;
+}
+
+#temp_group {
+    display: flex;
+    flex-direction: column;
+}
+
+#temp_main_header_word{
+    font-size: 40px;
+}
+
+.temp_sub_group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.temp_sub_header {
+    font-size: 30px;
+}
+
+.default_text {
+    font-size: 20px;
+}
+
+.default_header {
+    font-size: 30px;
+}
+
+/*myEvent*/
+.myEvent_eventRegistered {
+    /*background-color: red;*/
+
+    margin-top: 20px;
+}
+
+.myEvent_textwarp {
+    /*background-color: red;*/
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-width: 170px; /* Adjust this value to set the desired width */
+    height: 2.3em; /* Adjust based on your font-size to fit two lines */
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.center {
+    /*background-color: red;*/
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+
+#createEventForm {
+    /*background-color: red;*/
+
+    width: 95%;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#createEventForm input[type="text"],
+#createEventForm .p-calendar .p-inputtext {
+    /*background-color: red;*/
+
+    font-size: 20px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px; /* Gives a rounded corner effect */
+    border: 1px solid #ccc; /* A light gray border */
+}
+
+#editProfileForm {
+    /*background-color: red;*/
+
+    width: 40%;
+    margin: auto;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#editProfileForm input[type="text"],
+#editProfileForm .p-calendar .p-inputtext {
+    /*background-color: red;*/
+
+    font-size: 20px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px; /* Gives a rounded corner effect */
+    border: 1px solid #ccc; /* A light gray border */
+}
+
+#passwordForm {
+    /*background-color: red;*/
+
+    width: 40%;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#passwordForm input[type="text"],
+#passwordForm .p-calendar .p-inputtext {
+    /*background-color: red;*/
+
+    font-size: 20px;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px; /* Gives a rounded corner effect */
+    border: 1px solid #ccc; /* A light gray border */
+}
+
+.eventDetails_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event_photo_div {
+    /*background-color: lightgray;*/
+
+    width: 90%;
+    min-height: 300px;
+    max-height: 500px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+    margin: 20px;
+    margin-bottom: 40px;
+}
+
+.event_photo {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.event_details {
+    /*background-color: yellow;*/
+
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+}
+
+.myEvent_itemHeader {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.event_top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.event_top_left {
+    /*background-color: red;*/
+
+    width: 70%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.event_asdfas {
+    font-size: 18px;
+    margin: 5px;
+}
+
+.event_title {
+    font-size: 35px;
+    font-weight: bold;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-width: 170px; /* Adjust this value to set the desired width */
+    height: 3.8em; /* Adjust based on your font-size to fit two lines */
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.event_top_right {
+    /*background-color: lightblue;*/
+    width: 28%;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.event_register_button {
+    /*background-color: black;*/
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+    width: 85%;
+    height: 50px;
+}
+
+.event_register_button1 {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.event_details_sub_div {
+    /*background-color: red;*/
+
+    margin: 10px;
+    margin-bottom: 30px;
+}
+
+.event_details_sub_header {
+    font-size: 25px;
+}
+
+.event_text {
+    font-size: 18px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout/default.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <h:outputStylesheet name="css/default.css"/>
+    </h:head>
+
+    <ui:define name="title">
+        Create Event
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="createEventForm">
+            <p:growl id="growl" showDetail="true" life="1000"/>
+            <p:panelGrid columns="2">
+                <f:facet name="header">
+                    <div style="font-size: 20px">Create Event</div>
+                </f:facet>
+                <h:outputText value="Title" />
+                <p:inputText id="title" value="#{eventManagedBean.title}" 
+                             required="true"
+                             requiredMessage="Title is required" />
+
+                <h:outputText value="Event Description" />
+                <p:inputText id="description" value="#{eventManagedBean.description}"
+                             required="true"
+                             requiredMessage="Event Description is required" />
+
+                <h:outputText value="Location" />
+                <p:inputText id="location" value="#{eventManagedBean.location}"
+                             required="true"
+                             requiredMessage="Location is required" />
+
+                <h:outputText value="Max Pax" />
+                <p:inputText id="maxPax" value="#{eventManagedBean.maxPax}"
+                             required="true"
+                             requiredMessage="Max Pax is required" />
+
+                <h:outputText value="Event Date(dd/mm/yyyy)" />
+                <p:calendar id="date" value="#{eventManagedBean.date}"
+                            required="true"
+                            requiredMessage="Event Date is required"
+                            pattern="dd/MM/yyyy HH:mm"
+                            converterMessage="Format should be dd/MM/yyyy HH:mm" />
+
+                <h:outputText value="Registration Deadline(dd/mm/yyyy)" />
+                <p:calendar id="deadline" value="#{eventManagedBean.deadline}"
+                            required="true"
+                            requiredMessage="Registration Deadline is required"
+                            pattern="dd/MM/yyyy HH:mm"
+                            converterMessage="Format should be dd/MM/yyyy HH:mm" />
+
+            </p:panelGrid>
+            <p:commandButton id="Button" action="#{eventManagedBean.createEvent}" value="Create Event" update="createEventForm" ajax="true" 
+                             class="default_button" style="margin-top: 20px"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

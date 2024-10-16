@@ -1,0 +1,57 @@
+#website_top {
+    position: fixed;
+    background-color: white;
+    width: 95%;
+    margin-top: -80px;
+    margin-left: -20px;
+    min-width: 1200px;
+
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    height: 70px;
+    max-width: 100%;
+    padding: 0 20px;
+
+    border: 1px solid lightgray;
+}
+
+#website_content {
+    background-color: white;
+    padding: 5px;
+    margin: 80px 10px 0 10px;
+    min-height: 300px;
+}
+
+#website_bottom {
+    position: relative;
+    background-color: #1e0a3a;
+    padding: 5px;
+    margin-top: 10px;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        width: 1200px;
+    }
+
+    #website_top {
+        width: 1200px;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    body{
+        width: 1920px;
+    }
+
+    #website_top {
+        width: 1920px;
+    }
+}

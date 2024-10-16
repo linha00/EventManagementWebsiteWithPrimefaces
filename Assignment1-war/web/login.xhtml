@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/login_signup.css"/>
+        <title>
+            <ui:insert name="title">Login</ui:insert>
+        </title>
+        <script>
+            window.onload = function () {
+                document.getElementById("loginForm:username").value = "";
+            }
+        </script>
+    </h:head>
+
+    <h:body>
+        <h:form id="loginForm">
+            
+            <p:panel id="loginPnl"
+                     style="width: 390px;
+                     background: #fff;
+                     border-radius: 10px;
+                     padding: 77px 50px 45px 45px;
+                     ">
+                <img src="resources/image/fullLogo.webp" alt="Logo" style="
+                     width: 250px;
+                     margin-bottom: 20px; 
+                     "/>
+                <div>
+                    <h:outputText value="Username:"/>
+                    <p:inputText id="username" value="#{authenticationManagedBean.username}" 
+                                 required="true"
+                                 requiredMessage="Username is required" />
+                    <p:message for="username" showDetail="true" showSummary="false" />
+                </div>
+
+                <div>
+                    <h:outputText value="Password:" />
+                    <p:password id="password" value="#{authenticationManagedBean.password}"
+                                required="true"
+                                feedback="false"
+                                requiredMessage="Password is required" />
+                    <p:message for="password" />
+                </div>
+                <h:messages for="loginButton" showDetail="true" showSummary="false" errorStyle="color:red" />
+                <div>
+                    <p:commandButton id="loginButton" action="#{authenticationManagedBean.login}" value="Login" update="loginForm" ajax="true" style="
+                                     margin-top: 15px;
+                                     margin-left: 35px;
+                                     margin-bottom: 10px;
+                                     width: 150px;
+                                     height: 50px;
+                                     font-size: 25px;
+                                     "/>
+                </div>
+                <div>
+                    <h:outputText value="Dont't have an account? " />
+                    <h:outputLink value="signup.xhtml">Sign up</h:outputLink>
+                </div>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

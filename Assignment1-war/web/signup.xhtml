@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/login_signup.css"/>
+        <title>
+            <ui:insert name="title">Signup</ui:insert>
+        </title>
+        <script>
+            window.onload = function () {
+                document.getElementById("signupForm:username").value = "";
+                document.getElementById("signupForm:password").value = "";
+                document.getElementById("signupForm:name").value = "";
+                document.getElementById("signupForm:email").value = "";
+                document.getElementById("signupForm:contact").value = "";
+            }
+        </script>
+    </h:head>
+
+    <h:body>
+        <h:form id="signupForm">
+            <p:panel id="signup_pane" style="width: 450px;
+                     background: #fff;
+                     border-radius: 10px;
+                     padding: 77px 50px 45px 45px;
+                     ">
+                <div style="
+                     display: flex;
+                     flex-direction: column;
+                     justify-content: center;
+                     align-items: center;">
+                    
+                    <span style="
+                          font-size: 40px;
+                          margin-bottom: 30px;
+                          margin-top: -30px;
+                          ">Sign Up</span>
+                    <div class="set">
+                        <h:outputText value="Username" />
+                        <p:inputText id="username" value="#{authenticationManagedBean.username}" 
+                                     required="true"
+                                     requiredMessage="Username is required" />
+                        <p:message for="username" showDetail="true" showSummary="false" />
+                    </div>
+
+                    <div class="set">
+
+                        <h:outputText value="Password" />
+                        <p:inputText id="password" value="#{authenticationManagedBean.password}"
+                                     required="true"
+                                     requiredMessage="Password is required" />
+                        <p:message for="password" />
+                    </div>
+
+                    <div class="set">
+                        <h:outputText value="Name" />
+                        <p:inputText id="name" value="#{authenticationManagedBean.name}"
+                                     required="true"
+                                     requiredMessage="Name is required" />
+                        <p:message for="name" />
+                    </div>
+
+                    <div class="set">
+                        <h:outputText value="Email" />
+                        <p:inputText id="email" value="#{authenticationManagedBean.email}"
+                                     required="true"
+                                     requiredMessage="Email is required" />
+                        <p:message for="email" />
+                    </div>
+
+                    <div class="set">
+                        <h:outputText value="Contact Number" />
+                        <p:inputText id="contact" value="#{authenticationManagedBean.contact}"
+                                     required="true"
+                                     requiredMessage="Contact Number is required" />
+                        <p:message for="contact" />
+                    </div>
+                    <h:messages for="signupButton" showDetail="true" showSummary="false" errorStyle="color:red" />
+                    <div>
+                        <p:commandButton id="signupButton" action="#{authenticationManagedBean.signup}" value="Signup" update="signupForm" ajax="true" style="
+                                     margin-top: 15px;
+                                     margin-bottom: 10px;
+                                     width: 150px;
+                                     height: 50px;
+                                     font-size: 25px;
+                                     "/>
+                    </div>
+                    <div>
+                        <h:outputText value="By creating your account, you accepted our " />
+                        <h:outputLink value="temp.xhtml" target="_blank">Terms and Conditions</h:outputLink>
+                    </div>
+                </div>
+            </p:panel>
+            <p:blockUI block="signup_pane" trigger="signupButton">
+                <p:graphicImage value="resources/images/loader.gif" />
+            </p:blockUI>
+        </h:form>
+
+    </h:body>
+</html>

@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <title>
+            <ui:insert name="title">Default Title</ui:insert>
+        </title>
+    </h:head>
+
+    <h:body>
+        <div id="website_top">
+            <div id="website_logo">
+                <a href="index.xhtml">
+                    <img src="resources/image/logo.png" alt="Logo" />
+                </a>
+            </div>
+            <div id="top_menu">
+                <div id="searchbar">
+                    <h:form>
+                        <p:inputText value="#{eventSearchManagedBean.searchInput}" placeholder="Search" styleClass="search_input_box"/>
+                        <p:selectOneMenu value="#{eventSearchManagedBean.searchType}" styleClass="search_dropbox">
+                            <f:selectItem itemValue = "Name" itemLabel = "Name" />
+                            <f:selectItem itemValue = "Location" itemLabel = "Location" />
+                        </p:selectOneMenu>
+                        <p:commandButton value="Search" action="#{eventSearchManagedBean.clickSearch()}" ajax="false" styleClass="search_button"/>
+                    </h:form>
+                </div>
+                <div id="right_menu">
+                    <!--not logged in--> 
+                    <h:form rendered="#{!authenticationManagedBean.isLogin()}">  
+                        <p:menubar>
+                            <p:menuitem value="Find Events" url="searchResults.xhtml" />
+                            <p:menuitem value="Create Events" url="login.xhtml" />
+                            <p:submenu label="Help Center">
+                                <p:menuitem value="Help Center" url="temp.xhtml" />
+                                <p:menuitem value="Find Your Ticket" url="temp.xhtml" />
+                                <p:menuitem value="Contact Your Organizer" url="temp.xhtml" />
+                            </p:submenu>
+                            <p:menuitem value="Log In" url="login.xhtml" />
+                            <p:menuitem value="Sign Up" url="signup.xhtml" />
+                        </p:menubar>
+                    </h:form>
+
+                    <!--logged in-->
+                    <h:form rendered="#{authenticationManagedBean.isLogin()}">  
+                        <p:menubar>
+                            <p:menuitem value="Find Events" url="searchResults.xhtml" />
+                            <p:menuitem value="My Events" url="myEvent.xhtml" />
+                            <p:submenu label="Help Center">
+                                <p:menuitem value="Help Center" url="temp.xhtml" />
+                                <p:menuitem value="Find Your Ticket" url="temp.xhtml" />
+                                <p:menuitem value="Contact Your Organizer" url="temp.xhtml" />
+                            </p:submenu>
+                            <p:menuitem value="Welcome, " disabled="true"/>
+                            <p:submenu label="#{userManagedBean.getName()}">
+                                <p:menuitem value="Profile" url="profile.xhtml" />
+                                <p:menuitem value="Log Out" action="#{authenticationManagedBean.logout()}" />
+                            </p:submenu>
+                        </p:menubar>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <div id="website_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        <div id="website_bottom">
+            <div class="footer_top">
+                <div class="footer_text_group">
+                    <span class = "footerTextHeader">Use EventNUS</span>
+                    <span class="footerText"><a href="temp.xhtml">How it Works</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Pricing</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Mobile App</a></span>
+                    <span class="footerText"><a href="temp.xhtml">SiteMap</a></span>
+                </div>
+                <div class="footer_text_group">
+                    <span class = "footerTextHeader">Plan Events</span>
+                    <span class="footerText"><a href="temp.xhtml">Conference Management Software</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Nonprofits and Fundraisers</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Family Reunions</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Sell Tickets</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Event Management Software</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Event Registration</a></span>
+                    <span class="footerText"><a href="temp.xhtml">RSVP Online</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Event Payment</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Post Events Online Free</a></span>
+                </div>
+                <div class="footer_text_group">
+                    <span class="footerTextHeader">Find Events</span>
+                    <span class="footerText"><a href="temp.xhtml">Singapore Events</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Johor Bahru Events</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Kukup Events</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Virtual Events</a></span>
+                    <span class="footerText"><a href="temp.xhtml">All Cities</a></span>
+                </div>
+                <div class="footer_text_group">
+                    <span class = "footerTextHeader">Connect With Us</span>
+                    <span class="footerText"><a href="temp.xhtml">Contact Support</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Twitter</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Facebook</a></span>
+                    <span class="footerText"><a href="temp.xhtml">LinkedIn</a></span>
+                    <span class="footerText"><a href="temp.xhtml">Instagram</a></span>
+                </div>
+            </div>
+            <div class="footer_bottom">
+                <div id ="footer_bottom_left">
+                    <span class="footerText">@Copy From Eventbrite</span>
+                </div>
+                <div id="footer_bottom_middle">
+                    <span class="footerText"><a href="temp.xhtml">About</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Blog</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Help</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Careers</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Press</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Impact</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Investors</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Security</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Developers</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Terms</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Privacy</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Accessibility</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Cookies</a></span>
+                    <span class="fullstop">.</span>
+                    <span class="footerText"><a href="temp.xhtml">Manage Cookie Preferences</a></span>
+                </div>
+                <div id="footer_bottom_right">
+                    <span class="footerText">temp</span>
+                </div>
+            </div>
+            <div class="footer_sell">
+                <span class="footerText"><a href="temp.xhtml">Do Not Sell or Share My Personal Information</a></span>
+            </div>
+        </div>
+
+    </h:body>
+
+</html>

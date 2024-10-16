@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <h:outputStylesheet name="css/default.css"/>
+    </h:head>
+
+    <ui:define name="title">
+        #{eventDetailsManagedBean.getTitle()} (EventId: #{param.id})
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="eventDetails_div">
+                <div class="event_photo_div">
+                    <p:commandLink onclick="PF('dialogVar').show()" disabled="#{!eventDetailsManagedBean.isOrganizer()}" styleClass="custom-link" >
+                        <div>
+                            <p:graphicImage rendered="#{empty eventDetailsManagedBean.photo}" value="resources/image/fullLogo.webp" alt="event photo" styleClass="event_photo"/>
+                            <p:graphicImage rendered="#{not empty eventDetailsManagedBean.photo}" value="#{eventDetailsManagedBean.photo}" alt="event photo" styleClass="event_photo"/>
+                        </div>
+                    </p:commandLink>
+                </div>
+                <h:outputText value="Click on Event Photo to Edit" rendered="#{eventDetailsManagedBean.isOrganizer()}" styleClass="yourOptionalCSSClass" style="margin-top: -32px; margin-bottom: 35px;"/>
+
+                <div class="event_details">
+                    <div class="event_top">
+                        <div class="event_top_left">
+                            <h:outputText value="#{eventDetailsManagedBean.eventDate}" styleClass="event_asdfas">
+                                <f:convertDateTime type="date" pattern="EEEE, dd MMMM" />
+                            </h:outputText>
+                            <h:outputText value="#{eventDetailsManagedBean.getTitle()}" styleClass="event_title" />
+                            <h:outputText value="Deadline for Registeration: #{eventDetailsManagedBean.getDeadline()}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </div>
+
+                        <div class="event_top_right">
+                            <h:outputText value="Remaining Ticket: #{eventDetailsManagedBean.remainingPax}" style="font-size: 17px;" />
+
+                            <div class="event_register_button">
+                                <p:commandButton class="event_register_button1" rendered="#{not eventDetailsManagedBean.isOrganizer() and eventDetailsManagedBean.showButton() and eventDetailsManagedBean.registered}" value="Unregister" action="#{eventDetailsManagedBean.unregisterEvent()}" update="form" oncomplete="reloadPage()" disabled="#{!eventDetailsManagedBean.canUnregister()}" />
+                                <p:commandButton class="event_register_button1" rendered="#{not eventDetailsManagedBean.isOrganizer() and eventDetailsManagedBean.showButton() and not eventDetailsManagedBean.registered}" value="Register" action="#{eventDetailsManagedBean.registerEvent()}" update="form" oncomplete="reloadPage()" disabled="#{!eventDetailsManagedBean.canRegister()}" />
+                                <p:commandButton class="event_register_button1" rendered="#{not eventDetailsManagedBean.isOrganizer() and !eventDetailsManagedBean.showButton() and eventDetailsManagedBean.registered}" value="Unregister" action="#{eventDetailsManagedBean.unregisterEvent()}" update="form" oncomplete="reloadPage()" disabled="true" />
+                                <p:commandButton class="event_register_button1" rendered="#{not eventDetailsManagedBean.isOrganizer() and !eventDetailsManagedBean.showButton() and not eventDetailsManagedBean.registered}" value="Register" action="#{eventDetailsManagedBean.registerEvent()}" update="form" oncomplete="reloadPage()" disabled="true" />
+                                <p:commandButton class="event_register_button1" rendered="#{eventDetailsManagedBean.isOrganizer()}" value="Edit Details" oncomplete="PF('eventDialog').show()" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="event_details_sub_div">
+                        <span class="event_details_sub_header">Date and Time</span>
+                        <div style="margin: 5px;">
+                            <img src="resources/image/datetimelogo.png" alt="logo" style="height: 18px; padding-top: 2px;"/>
+                            <h:outputText value="#{eventDetailsManagedBean.eventDate}" styleClass="event_text">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </div>
+                    </div>
+
+                    <div class="event_details_sub_div">
+                        <span class="event_details_sub_header">Location</span>
+                        <div style="margin: 5px;">
+                            <img src="resources/image/loctionlogo.png" alt="logo" style="height: 18px; padding-top: 2px;"/>
+                            <h:outputText value="#{eventDetailsManagedBean.getLocation()}" styleClass="event_text" />
+                        </div>
+                    </div>
+
+                    <div class="event_details_sub_div">
+                        <span class="event_details_sub_header">Refund Policy</span>
+                        <div style="margin: 10px;">
+                            <span class="event_text">Contact the organiser to request a refund.</span>
+                        </div>
+                    </div>
+                    <div class="event_details_sub_div">
+                        <span class="event_details_sub_header">About this event</span>
+                        <div style="margin: 10px;">
+                            <h:outputText value="#{eventDetailsManagedBean.getDescription()}" styleClass="event_text" />
+                        </div>
+                    </div>
+                    <div class="event_details_sub_div">
+                        <span class="event_details_sub_header">Organizer</span>
+                        <div style="margin: 10px;">
+                            <h:outputText value="#{eventDetailsManagedBean.getEvent().getOrganizer().getName()}" styleClass="event_text" />
+                        </div>
+                    </div>
+                </div>
+
+                <p:dialog header="Edit Event Details" widgetVar="eventDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="editEventDetails">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Id" />
+                            <h:outputText value="#{eventDetailsManagedBean.getEventId()}" />
+
+                            <h:outputText value="Name" styleClass="myEvent_itemHeader" />
+                            <h:inputText value="#{eventDetailsManagedBean.title}" styleClass="myEvent_item" />
+
+                            <h:outputText value="Description" styleClass="myEvent_itemHeader" />
+                            <h:inputText value="#{eventDetailsManagedBean.description}" styleClass="myEvent_item" />
+
+                            <h:outputText value="Location" styleClass="myEvent_itemHeader" />
+                            <h:inputText value="#{eventDetailsManagedBean.location}" styleClass="myEvent_item" />
+
+                            <h:outputText value="Max Pax" styleClass="myEvent_itemHeader" />
+                            <h:inputText value="#{eventDetailsManagedBean.maxPax}" styleClass="myEvent_item" />
+
+                            <h:outputText value="Remaining Pax" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.remainingPax}" />
+
+                            <h:outputText value="Date" styleClass="myEvent_itemHeader" />
+                            <p:calendar id="date" value="#{eventDetailsManagedBean.eventDate}"
+                                        required="true"
+                                        requiredMessage="Event Date is required"
+                                        pattern="dd/MM/yyyy HH:mm" />
+
+                            <h:outputText value="Deadline for Registration" styleClass="myEvent_itemHeader" />
+                            <p:calendar id="deadline" value="#{eventDetailsManagedBean.deadline}"
+                                        required="true"
+                                        requiredMessage="Registration Deadline is required"
+                                        pattern="dd/MM/yyyy HH:mm" />
+                        </p:panelGrid>
+                        <p:commandButton action="#{eventDetailsManagedBean.updateEvent()}" update="form" value="Update Details" onclick="reloadPage()" />
+                    </p:outputPanel>
+                </p:dialog>
+
+                <!--for organizer-->
+                <h:panelGroup layout="block" styleClass="eventDetails_edits" rendered="#{eventDetailsManagedBean.isOrganizer()}" 
+                              style="margin: 10px">
+                    <span class="event_details_sub_header" >Organizer Settings</span>
+                    <div style="margin: 20px">
+                        <p:panelGrid columns="2">
+                            <f:facet name="header">
+                                <div style="font-size: 20px">Event Details</div>
+                            </f:facet>
+                            <h:outputText value="Name:" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.getTitle()}" styleClass="myEvent_item" />
+                            <h:outputText value="Description:" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.getDescription()}" styleClass="myEvent_item" />
+                            <h:outputText value="Location:" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.getLocation()}" styleClass="myEvent_item" />
+                            <h:outputText value="Max Pax:" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.getMaxPax()}" styleClass="myEvent_item" />
+                            <h:outputText value="Remaining Pax" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.remainingPax}" class="myEvent_item" />
+                            <h:outputText value="Date:" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.eventDate}" styleClass="myEvent_item">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                            <h:outputText value="Deadline for Registeration:" styleClass="myEvent_itemHeader" />
+                            <h:outputText value="#{eventDetailsManagedBean.getDeadline()}" styleClass="myEvent_item">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </div>
+
+
+                    <h:panelGroup layout="block" styleClass="eventDetails_attendee" style="margin: 10px">
+                        <h:outputText value="Attendee Registered" styleClass="event_details_sub_header" />
+                        <div style="margin: 10px">
+                            <p:dataTable widgetVar="registeredTable" var="attendee" value="#{eventDetailsManagedBean.attendeeRegistered}" 
+                                         resizableColumns="false" emptyMessage="No Attendee Registered">
+                                <f:facet name="header">
+                                    <p:outputPanel style="text-align: right;">
+                                        <h:outputText value="Search: " />
+                                        <p:inputText placeholder="Enter Name" value="#{eventDetailsManagedBean.searchString}">
+                                            <p:ajax event="keyup" update="form" listener="#{eventSearchManagedBean.handleSearch}" />
+                                        </p:inputText>
+                                    </p:outputPanel>
+                                </f:facet>
+
+                                <p:column headerText="Id">
+                                    <div class="center">
+                                        <h:outputText value="#{attendee.userAccountId}" />
+                                    </div>
+                                </p:column>
+
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{attendee.name}" />
+                                    <h:outputText value="#{attendee.getUserAccountId()}" />
+                                </p:column>
+
+                                <p:column headerText="Attendance">
+                                    <div class="center">
+                                        <h:selectBooleanCheckbox value="#{attendee.attented}">
+                                            <p:ajax listener="#{eventDetailsManagedBean.updateAttendance(attendee)}" update="form" />
+                                        </h:selectBooleanCheckbox>
+                                    </div>
+                                </p:column>
+
+                                <p:column>
+                                    <div class="center" style="justify-content: space-evenly">
+                                        <p:commandButton value="View" oncomplete="PF('attendeeDialog').show()" title="View" update="form">
+                                            <f:setPropertyActionListener target="#{attendeeDetailsManagedBean.selectedAttendeeId}" value="#{attendee.getUserAccountId()}" />
+                                        </p:commandButton>
+
+                                        <p:commandButton value="Delete" action="#{eventDetailsManagedBean.unregisterEvent(attendee)}" update="form" oncomplete="reloadPage()" disabled="#{!eventDetailsManagedBean.canUnregister()}" />
+                                    </div>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <p:dialog header="Attendee Details" widgetVar="attendeeDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="attendeeDetails">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="Id" />
+                            <h:outputText value="#{attendeeDetailsManagedBean.selectedAttendeeId}" />
+
+                            <h:outputText value="Name" />
+                            <h:outputText value="#{attendeeDetailsManagedBean.name}" />
+
+                            <h:outputText value="Email" />
+                            <h:outputText value="#{attendeeDetailsManagedBean.email}" />
+
+                            <h:outputText value="Contact" />
+                            <h:outputText value="#{attendeeDetailsManagedBean.contact}" />
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+
+                <script type="text/javascript">
+                    function reloadPage() {
+                        window.location.reload();
+                    }
+                </script>
+            </div>
+        </h:form>
+        <p:dialog widgetVar="dialogVar" modal="true" header="Edit Event Photo" resizable="false">
+            <div style="min-height: 200px; max-height: 300px;">
+                <p:graphicImage
+                    value="resources/image/fullLogo.webp"
+                    style="max-height: 300px; max-width: 1000px; border-radius: 5px;" />
+            </div>
+
+            <h:form enctype="multipart/form-data">
+                <h:inputFile value="#{eventDetailsManagedBean.uploadedfile}" />
+                <h:commandButton action="#{eventDetailsManagedBean.upload}" value="Upload"/>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>

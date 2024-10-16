@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./layout/default.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <h:outputStylesheet name="css/default.css"/>
+    </h:head>
+
+    <ui:define name="title">
+        My Events
+    </ui:define>
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="myEvent_eventCreated">
+            <div style="display: flex; flex-direction: row; justify-content: space-between; 
+                 margin-bottom: 20px;">
+                <h:outputText value="Event Created by You" class="default_header" />
+                <p:linkButton class="default_button" outcome="createEvent.xhtml" value="Create Event" />
+            </div>
+            <h:form id="form_created">
+                <p:dataTable widgetVar="EventTable" var="event" value="#{myEventManagedBean.eventCreated}" resizableColumns="false" emptyMessage="No Events found with given criteria"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             >
+                    <f:facet name="header">
+                        <p:outputPanel style="text-align: right;">
+                            <h:outputText value="Search: " />
+                            <h:selectOneMenu value="#{myEventManagedBean.searchType_created}">
+                                <f:selectItem itemValue="NAME" itemLabel="Name" />
+                                <f:selectItem itemValue="LOCATION" itemLabel="Location" />
+                                <p:ajax listener="#{myEventManagedBean.handleSearch}" update="form_created"/>
+                            </h:selectOneMenu>
+                            <p:inputText placeholder="Enter keywords" value="#{myEventManagedBean.searchString_created}">
+                                <p:ajax event="keyup" update="form_created" listener="#{myEventManagedBean.handleSearch}" />
+                            </p:inputText>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="Id">
+                        <div class="center">
+                            <h:outputText value="#{event.eventId}" />
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{event.title}" class="myEvent_textwarp"/>
+                    </p:column>
+
+                    <p:column headerText="Location">
+                        <h:outputText value="#{event.location}" class="myEvent_textwarp"/>
+                    </p:column>
+
+                    <p:column headerText="Date">
+                        <div class="center">
+                            <h:outputText value="#{event.eventDate}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Max Pax">
+                        <div class="center">
+                            <h:outputText value="#{event.maxPax}" />
+                        </div>
+                    </p:column>
+                    <p:column>
+                        <div class="center">
+                            <p:button value="View" outcome="eventDetails.xhtml">
+                                <f:param name="eventId" value="#{event.eventId}" />
+                            </p:button>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </h:panelGroup>
+
+        <h:panelGroup layout="block" styleClass="myEvent_eventRegistered">
+            <h:outputText value="Event You Registered" styleClass="default_header" />
+            <h:form id="form_registered">
+                <p:dataTable widgetVar="EventTable" var="event" value="#{myEventManagedBean.eventRegistered}" resizableColumns="false" emptyMessage="No Events found with given criteria"
+                             rows="10" paginator="true" paginatorPosition="bottom"
+                             >
+                    <f:facet name="header">
+                        <p:outputPanel style="text-align: right;">
+                            <h:outputText value="Search: " />
+                            <h:selectOneMenu value="#{myEventManagedBean.searchType_registered}">
+                                <f:selectItem itemValue="NAME" itemLabel="name" />
+                                <f:selectItem itemValue="LOCATION" itemLabel="location" />
+                                <p:ajax listener="#{myEventManagedBean.handleSearch}" update="form_registered"/>
+                            </h:selectOneMenu>
+                            <p:inputText placeholder="Enter keywords" value="#{myEventManagedBean.searchString_registered}">
+                                <p:ajax event="keyup" update="form_registered" listener="#{myEventManagedBean.handleSearch}" />
+                            </p:inputText>
+                        </p:outputPanel>
+                    </f:facet>
+
+                    <p:column headerText="Id">
+                        <div class="center">
+                            <h:outputText value="#{event.eventId}" />
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{event.title}" />
+                    </p:column>
+
+                    <p:column headerText="Location">
+                        <h:outputText value="#{event.location}" />
+                    </p:column>
+
+                    <p:column headerText="Date">
+                        <div class="center">
+                            <h:outputText value="#{event.eventDate}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
+                        </div>
+                    </p:column>
+
+                    <p:column headerText="Max Pax">
+                        <div class="center">
+                            <h:outputText value="#{event.maxPax}" />
+                        </div>
+                    </p:column>
+                    <p:column>
+                        <div class="center">
+                            <p:button value="View" outcome="eventDetails.xhtml">
+                                <f:param name="eventId" value="#{event.eventId}" />
+                            </p:button>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </h:panelGroup>
+    </ui:define>
+
+</ui:composition>
